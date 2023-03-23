@@ -5,6 +5,9 @@
 # What is it
 Use Python in Decorator / Annotation Like Java Lombok / C# Annotation / TypeScript Decorator
 
+作者是写 Java / TypeScript 习惯了注解
+
+顺手写
 
 # How to use 如何使用
 ## install 安装依赖
