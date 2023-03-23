@@ -7,6 +7,11 @@ Use Python in Decorator / Annotation Like Java Lombok / C# Annotation / TypeScri
 
 作者是写 Java / TypeScript 习惯了注解
 
+Use Like Other Language:
+1. Java Lombok @Data
+2. TypeScript  @Async
+3. C#  [Required(ErrorMessage = "{0} is required")]
+
 顺手写
 
 # How to use 如何使用
