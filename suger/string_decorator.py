@@ -1,4 +1,4 @@
-def class_str(clazz):
+def string(clazz):
     '''
     根绝 field 自动生成 class 的 __str__
     :param clazz: 类
@@ -11,3 +11,4 @@ def class_str(clazz):
         )
     clazz.__str__ = __str__
     return clazz
+

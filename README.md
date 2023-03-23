@@ -5,10 +5,16 @@
 # What is it
 Use Python in Decorator / Annotation Like Java Lombok / C# Annotation / TypeScript Decorator
 
-Demo
 
+# How to use 如何使用
+## install 安装依赖
+```shell
+pip install suger
+```
+
+## @string | __str__
 ```python
-@class_str
+@string
 class MockData:
     def __init__(self, age):
         self.age = age
@@ -21,6 +27,32 @@ print(data)
 
 ```
 
+## @csv | CSV 
+```python
+@csv
+class MockData:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        self.emptyTips = ''
+
+
+
+
+class Test(TestCase):
+    def test_csv(self):
+        data = MockData(name='neko', age=18)
+
+        # csv 输出文本
+        print(data.csv_str())
+        # csv 的格式
+        print(data.csv_format())
+
+# 示例中，有个字段为空
+# neko,18,
+# name,age,emptyTips
+
+```
 
 
 ```shell

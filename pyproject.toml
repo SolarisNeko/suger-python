@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "suger"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
     { name = "SolarisNeko", email = "1417015340@qq.com" },
 ]
@@ -17,7 +17,7 @@ requires-python = ">=3.7"
 
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: Apache License",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 

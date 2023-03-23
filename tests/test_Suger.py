@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from suger.string_decorator import class_str
+from suger import string
 
 
-@class_str
+@string
 class MockData:
     def __init__(self, age):
         self.age = age
