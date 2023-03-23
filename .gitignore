@@ -1,0 +1,12 @@
+venv/
+.idea/
+*.iml
+
+.vscode/
+
+.fleet/
+
+dist/
+build/
+
+.pypirc

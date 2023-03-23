@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "suger"
+version = "0.0.1"
+authors = [
+    { name = "SolarisNeko", email = "1417015340@qq.com" },
+]
+
+description = "try to upload to Pypi"
+readme = "README.md"
+
+requires-python = ">=3.7"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/SolarisNeko/python-suger"
+"Bug Tracker" = "https://github.com/SolarisNeko/python-suger/issues"
