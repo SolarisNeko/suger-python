@@ -1,10 +1,8 @@
 # suger
 
 
-suger is a sugar ~ 
-
-use python with @decorator/@Annotation Like Java、C#、TypeScript 
-
+suger is a sugar ~
+    
 @author SolarisNeko
 
 
