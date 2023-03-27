@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 
 [project]
-name = "suger"
-version = "0.0.2"
+name = "sugar"
+version = "0.0.3"
 authors = [
     { name = "SolarisNeko", email = "1417015340@qq.com" },
 ]
@@ -22,5 +22,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/SolarisNeko/python-suger"
-"Bug Tracker" = "https://github.com/SolarisNeko/python-suger/issues"
+"Homepage" = "https://github.com/SolarisNeko/python-sugar"
+"Bug Tracker" = "https://github.com/SolarisNeko/python-sugar/issues"

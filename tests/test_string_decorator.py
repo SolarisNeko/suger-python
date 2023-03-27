@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from suger import string
+from sugar import string
 
 
 @string

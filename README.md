@@ -1,4 +1,4 @@
-# suger
+# sugar
 
 @author SolarisNeko
 
@@ -17,7 +17,7 @@ Use Like Other Language:
 # How to use 如何使用
 ## install 安装依赖
 ```shell
-pip install suger
+pip install sugar
 ```
 
 ## @string | __str__
@@ -67,6 +67,6 @@ class Test(TestCase):
 ```shell
 git init
 
- git remote add github https://github.com/SolarisNeko/neko233-python-suger.git
- git remote add origin https://gitee.com/SolarisNeko/neko233-python-suger.git
+ git remote add github https://github.com/SolarisNeko/neko233-python-sugar.git
+ git remote add origin https://gitee.com/SolarisNeko/neko233-python-sugar.git
 ```
