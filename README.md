@@ -26,7 +26,9 @@ Use Like Other Language:
 pip install suger
 ```
 
-## @string | __str__
+
+## decorator 装饰器/注解
+### @string | __str__
 ```python
 @string
 class MockData:
@@ -41,7 +43,7 @@ print(data)
 
 ```
 
-## @csv | CSV 
+### @csv | CSV 
 ```python
 @csv
 class MockData:
@@ -67,6 +69,35 @@ class Test(TestCase):
 # name,age,emptyTips
 
 ```
+
+## 工具
+### FileUtils 文件工具
+```python
+
+from suger.common import FileUtils
+
+# 递归扫描, png 格式
+fileArray = FileUtils.scanDir('C:/Users/suger/Documents/WeChat Files', 'png')
+print(fileArray)
+
+```
+
+
+### ObjectUtils 对象工具
+```python
+from suger.common import ObjectUtils
+
+# true
+ObjectUtils.isNull(None)
+
+#  true
+data = {}
+ObjectUtils.isNotNull(data)
+
+
+
+```
+
 
 
 # my project init
