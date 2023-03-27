@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from sugar import csv
+from suger import csv
 
 
 @csv

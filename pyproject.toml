@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 
 [project]
-name = "sugar"
-version = "0.0.3"
+name = "suger"
+version = "0.0.4"
 authors = [
     { name = "SolarisNeko", email = "1417015340@qq.com" },
 ]
 
-description = "try to upload to Pypi"
+description = "suger is a sugar. use python in @decorator/@Annotation like other languages~"
 readme = "README.md"
 
 requires-python = ">=3.7"
@@ -22,5 +22,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/SolarisNeko/python-sugar"
-"Bug Tracker" = "https://github.com/SolarisNeko/python-sugar/issues"
+"Homepage" = "https://github.com/SolarisNeko/python-suger"
+"Bug Tracker" = "https://github.com/SolarisNeko/python-suger/issues"
