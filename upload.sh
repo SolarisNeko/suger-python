@@ -1,4 +1,6 @@
-rmdir dist/
+#del /f/s/q dist/
+
+Remove-Item -LiteralPath "dist" -Force -Recurse
 
 py -m pip install --upgrade pip
 

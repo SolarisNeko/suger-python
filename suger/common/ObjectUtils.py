@@ -1,3 +1,5 @@
+
+# @author SolarisNeko
 class ObjectUtils:
 
     @staticmethod
