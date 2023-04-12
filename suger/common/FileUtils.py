@@ -8,6 +8,10 @@ from suger.common.StringUtils import StringUtils
 class FileUtils:
 
     @staticmethod
+    def getFullPath(your_path):
+        return os.path.abspath(your_path)
+
+    @staticmethod
     def scanDir(dirPath, suffix=""):
         """
         递归扫描指定目录下指定后缀的所有文件名。
@@ -22,7 +26,7 @@ class FileUtils:
                     else:
                         continue
                 fileNames.append(os.path.join(root, name))
-        return fileNames
+        return list(map(FileUtils.getFullPath, fileNames))
 
     @staticmethod
     def deleteQuietly(fileOrDir):
@@ -57,9 +61,24 @@ class FileUtils:
             return f.read()
 
     @staticmethod
-    def writeStringToFile(file, data, encoding="utf-8"):
+    def writeStringToFile(file, data, encoding="utf-8", isAppend: bool = False):
+        if (isAppend):
+            with open(file, "a", encoding=encoding) as f:
+                f.write(data)
+            return
+
         """
         将字符串写入文件。
         """
         with open(file, "w", encoding=encoding) as f:
             f.write(data)
+
+    @classmethod
+    def isNotFileExists(cls, path):
+        return not FileUtils.isFileExists(path)
+
+    @classmethod
+    def isFileExists(cls, path):
+        if os.path.exists(path):
+            return True
+        return False

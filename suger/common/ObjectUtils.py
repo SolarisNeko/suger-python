@@ -1,5 +1,7 @@
-
 # @author SolarisNeko
+from collections import namedtuple
+
+
 class ObjectUtils:
 
     @staticmethod
@@ -35,3 +37,21 @@ class ObjectUtils:
         返回 obj 的哈希值，如果 obj 为 None，则返回 0。
         """
         return 0 if obj is None else hash(obj)
+
+    @staticmethod
+    def is_class(obj):
+        return isinstance(obj, type)
+
+    @staticmethod
+    def dict_to_class(dictory_obj, clazz: type):
+        """
+        dict -> object
+        :param dictory_obj: 字典对象 {}
+        :param clazz: 类
+        :return: 对象
+        """
+        classname = clazz
+        if ObjectUtils.is_class(clazz):
+            classname = clazz.__name__
+        # if typeName
+        return namedtuple(classname, dictory_obj.keys())(*dictory_obj.values())

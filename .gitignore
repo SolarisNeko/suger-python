@@ -1,3 +1,5 @@
+file_compare_map.*
+
 venv/
 .idea/
 *.iml
