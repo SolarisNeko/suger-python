@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from suger.common import JsonUtils
+from suger.data_operator import JsonUtils
 
 
 class TestJsonUtils(TestCase):

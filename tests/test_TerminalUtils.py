@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from suger.common.TerminalUtils import TerminalUtils
+from suger.terminal.TerminalUtils import TerminalUtils
 
 
 class TestTerminalUtils(TestCase):

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from suger.common.CsvUtils import CsvUtils
+from suger.data_operator.CsvUtils import CsvUtils
 
 
 class TestCsvUtils(TestCase):

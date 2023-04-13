@@ -5,7 +5,7 @@ import time
 from typing import List
 
 from suger.common import StringUtils, FileUtils
-from suger.common.CsvUtils import CsvUtils
+from suger.data_operator.CsvUtils import CsvUtils
 
 #
 DEFAULT_FILE_VERSION_OUTPUT_PATH = 'file_use_metadata.csv'
