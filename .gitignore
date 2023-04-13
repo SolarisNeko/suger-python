@@ -2,6 +2,8 @@ file_compare_map.*
 file_use_metadata.*
 FileCompareUtils_compare_results.*
 
+**/temp/**
+
 venv/
 .idea/
 *.iml

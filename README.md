@@ -1,5 +1,8 @@
 # suger
 
+version = 0.1.0
+
+## Introduce 介绍
 
 suger is a sugar ~ 
 
@@ -98,6 +101,89 @@ ObjectUtils.isNotNull(data)
 
 ```
 
+## SSH
+```python
+from unittest import TestCase
+
+from suger.terminal import SSH
+
+
+class TestSSH(TestCase):
+    def test_connect(self):
+        ssh = SSH(host='localhost', password='root')
+        ssh.connect()
+        output, err = ssh.execute_command('ls .')
+        print(output)
+
+
+```
+
+## Data Operator 数据操作
+### XML
+```python
+from unittest import TestCase
+
+from suger.data_operator import XmlUtils, ElementTree
+
+class TestXmlUtils(TestCase):
+    def test_find_element(self):
+
+        # 读取 XML 文件
+        xml = XmlUtils('example.xml')
+
+        # 查询节点
+        node = xml.find_element('.//book[@id="123"]')
+        print(node.text)
+
+        # 修改节点值
+        xml.set_element_value('.//book[@id="123"]/name', 'New Book Title')
+
+        # 添加节点
+        new_element = ElementTree.Element('book', {'id': '456'})
+        sub_element1 = ElementTree.SubElement(new_element, 'name')
+        sub_element1.text = 'New Book'
+        sub_element2 = ElementTree.SubElement(new_element, 'author')
+        sub_element2.text = 'New Author'
+        xml.add_element('.//books', new_element)
+
+        # 删除节点
+        xml.remove_element('.//book[@id="123"]')
+
+        # 写入文件
+        xml.write_file('new_example.xml')
+
+
+```
+
+
+### Excel 
+```python
+from unittest import TestCase
+
+from suger.data_operator.ExcelUtils import ExcelUtils
+
+
+class TestExcelUtils(TestCase):
+
+    def test_serialize(self):
+        # 读取 Excel 文件
+        workbook = ExcelUtils.load_workbook("example.xlsx")
+
+        # 获取指定名称的 sheet 对象
+        sheet = ExcelUtils.get_sheet_by_name(workbook, "Sheet1")
+
+        # 将 sheet 序列化为一个列表
+        data = ExcelUtils.serialize(sheet, skip_rows=1)
+
+        # 对列表进行操作
+
+        # 反序列化列表到指定的 sheet 对象
+        ExcelUtils.deserialize(sheet, data, skip_rows=1)
+
+        # 保存 Excel 文件
+        ExcelUtils.save_workbook(workbook, "example.xlsx")
+
+```
 
 
 # my project init

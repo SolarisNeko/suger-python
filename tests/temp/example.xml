@@ -1,0 +1,5 @@
+<root>
+    <books>
+
+        <book /><book id="456"><name>New Book</name><author>New Author</author></book></books>
+</root>
