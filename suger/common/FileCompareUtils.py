@@ -1,57 +1,74 @@
+import hashlib
 import os
 import string
 import time
-import hashlib
 from typing import List
 
-from suger.common import StringUtils, FileUtils, JsonUtils
+from suger.common import StringUtils, FileUtils
 from suger.common.CsvUtils import CsvUtils
 
-DEFAULT_OUTPUT_FILE_NAME = 'file_compare_map.csv'
+#
+DEFAULT_FILE_VERSION_OUTPUT_PATH = 'file_use_metadata.csv'
+# 对比结果
+DEFAULT_COMPARE_FILE_OUTPUT_PATH = 'FileCompareUtils_compare_results.output'
 
 
 class FileCompareUtils:
 
     @staticmethod
-    def writeCompareInfo(result_output_file='compare_by_history_file.txt',
-                         input_scan_directory: string = './',
-                         your_output_directory: string = './',
-                         your_output_file_name: string = DEFAULT_OUTPUT_FILE_NAME,
-                         isNeedMd5: bool = True,
-                         history_data_file_full_path: string = 'file_compare_map.csv',
-                         ):
+    def writeCompareFileVersionInfo(result_output_file=DEFAULT_COMPARE_FILE_OUTPUT_PATH,
+                                    isSplitOutput=True,
+                                    input_scan_directory: string = './',
+                                    isNeedMd5: bool = True,
+                                    history_data_file_full_path: string = DEFAULT_FILE_VERSION_OUTPUT_PATH,
+                                    ):
         same_changed_objs, only_in_list1_objs, only_in_list2_objs \
-            = FileCompareUtils.compare(input_scan_directory
-                                       , your_output_directory
-                                       , your_output_file_name
-                                       , isNeedMd5
-                                       ,
-                                       history_data_file_full_path)
+            = FileCompareUtils.compareFileVersion(filterFileName=result_output_file,
+                                                  input_scan_directory=input_scan_directory,
+                                                  isNeedMd5=isNeedMd5,
+                                                  history_data_file_full_path=history_data_file_full_path,
+                                                  )
 
-        FileUtils.writeStringToFile(result_output_file, 'is delete')
-        FileUtils.writeStringToFile(result_output_file, CsvUtils.serialize(only_in_list1_objs), isAppend=True)
-        FileUtils.writeStringToFile(result_output_file, '\nhave change\n', isAppend=True)
-        FileUtils.writeStringToFile(result_output_file, CsvUtils.serialize(same_changed_objs), isAppend=True)
-        FileUtils.writeStringToFile(result_output_file, '\nis createde\n', isAppend=True)
-        FileUtils.writeStringToFile(result_output_file, CsvUtils.serialize(only_in_list2_objs), isAppend=True)
+        isDeleteFile = result_output_file + '.deleted'
+        isChangedFile = result_output_file + '.changed'
+        isCreatedFile = result_output_file + '.created'
+
+        if not isSplitOutput:
+            FileUtils.writeStringToFile(result_output_file, '[is deleted]\n')
+            FileUtils.writeStringToFile(result_output_file, CsvUtils.serialize(only_in_list1_objs), isAppend=True)
+            FileUtils.writeStringToFile(result_output_file, '\n---\n', isAppend=True)
+            FileUtils.writeStringToFile(result_output_file, '[is changed]\n', isAppend=True)
+            FileUtils.writeStringToFile(result_output_file, CsvUtils.serialize(same_changed_objs), isAppend=True)
+            FileUtils.writeStringToFile(result_output_file, '\n---\n', isAppend=True)
+            FileUtils.writeStringToFile(result_output_file, '[is created]\n', isAppend=True)
+            FileUtils.writeStringToFile(result_output_file, CsvUtils.serialize(only_in_list2_objs), isAppend=True)
+            return;
+
+        FileUtils.writeStringToFile(isDeleteFile, CsvUtils.serialize(only_in_list1_objs))
+
+        FileUtils.writeStringToFile(isChangedFile, CsvUtils.serialize(same_changed_objs))
+
+        FileUtils.writeStringToFile(isCreatedFile, CsvUtils.serialize(only_in_list2_objs))
 
     @staticmethod
-    def compare(input_scan_directory: string = './',
-                your_output_directory: string = './',
-                your_output_file_name: string = DEFAULT_OUTPUT_FILE_NAME,
-                isNeedMd5: bool = True,
-                history_data_file_full_path: string = 'file_compare_map.csv',
-                ):
-        newDtoList, output_file_name = FileCompareUtils.getFileCompareInfo(input_scan_directory,
-                                                                           isNeedMd5,
-                                                                           your_output_directory,
-                                                                           your_output_file_name)
+    def compareFileVersion(filterFileName: string,
+                           input_scan_directory: string = './',
+                           isNeedMd5: bool = True,
+                           history_data_file_full_path: string = DEFAULT_FILE_VERSION_OUTPUT_PATH,
+                           ):
+        originalNewDtoList, output_file_name = FileCompareUtils.getFileVersionInfo(input_scan_directory,
+                                                                                   isNeedMd5,
+                                                                                   history_data_file_full_path)
+
+        # filter output file name
+        newDtoList = [dto for dto in originalNewDtoList if filterFileName not in dto.fullpath]
 
         old_csv_str = FileUtils.readFileToString(history_data_file_full_path)
         oldDtoList = CsvUtils.deserialize(old_csv_str, FileCompareDto)
 
-        same_changed_objs, only_in_list1_objs, only_in_list2_objs = FileCompareUtils.compare_dto_lists(
-            oldDtoList, newDtoList, 'fullpath')
+        same_changed_objs, only_in_list1_objs, only_in_list2_objs \
+            = FileCompareUtils.compare_dto_lists(oldDtoList, newDtoList, FileCompareDto.PK_FIELD)
+
         return same_changed_objs, only_in_list1_objs, only_in_list2_objs
 
     @staticmethod
@@ -98,35 +115,31 @@ class FileCompareUtils:
         return same_pk_but_change_objs, only_in_list1_objs, only_in_list2_objs
 
     @staticmethod
-    def writeFileCompareInfo(input_scan_directory: string,
-                             your_output_directory: string = './',
-                             your_output_file_name: string = DEFAULT_OUTPUT_FILE_NAME,
+    def writeFileVersionInfo(input_scan_directory: string,
+                             your_output_file_name: string = DEFAULT_FILE_VERSION_OUTPUT_PATH,
                              isNeedMd5: bool = True
                              ):
-        dataList, output_file_name = FileCompareUtils.getFileCompareInfo(input_scan_directory, isNeedMd5,
-                                                                         your_output_directory,
+        dataList, output_file_name = FileCompareUtils.getFileVersionInfo(input_scan_directory,
+                                                                         isNeedMd5,
                                                                          your_output_file_name)
 
         # Create a new file to store the file map
         with open(output_file_name, 'w') as f:
             # output
             csvList = CsvUtils.serialize(dataList)
-            f.write(f'{csvList} \n')
+            f.write(f'{csvList}')
 
     @staticmethod
-    def getFileCompareInfo(input_scan_directory, isNeedMd5, your_output_directory, your_output_file_name):
-        if (StringUtils.isBlank(input_scan_directory)):
+    def getFileVersionInfo(input_scan_directory, isNeedMd5, your_output_file_name):
+        if StringUtils.isBlank(input_scan_directory):
             raise Exception(f'your scan_directory is blank')
-        if (StringUtils.isBlank(your_output_directory)):
-            raise Exception(f'your output_directory is blank')
-        if (StringUtils.isBlank(your_output_file_name)):
+        if StringUtils.isBlank(your_output_file_name):
             raise Exception(f'your output_directory is blank')
 
         # handle
         scan_directory = os.path.normpath(input_scan_directory.strip())
-        output_directory = os.path.normpath(your_output_directory.strip())
         output_file_name = os.path.normpath(your_output_file_name.strip())
-        output_file_full_path = FileUtils.getFullPath(os.path.normpath(f'{output_directory}/{output_file_name}'))
+        output_file_full_path = FileUtils.getFullPath(os.path.normpath(f'{output_file_name}'))
 
         print(f'output file full path = {output_file_full_path}')
         # Create an empty dictionary to store file paths and update times
@@ -157,7 +170,7 @@ class FileCompareUtils:
                 continue
 
             md5_hash = None
-            if (isNeedMd5):
+            if isNeedMd5:
                 # Open the file in read-only binary mode
                 with open(linux_full_path, 'rb') as read_file:
                     # Read the contents of the file
@@ -177,6 +190,8 @@ class FileCompareUtils:
 
 
 class FileCompareDto:
+    PK_FIELD = 'fullpath'
+
     def __init__(self,
                  fullpath: string,
                  update_time: string,
@@ -185,10 +200,3 @@ class FileCompareDto:
         self.fullpath = fullpath
         self.update_time = update_time
         self.md5_hash = md5_hash
-
-
-if __name__ == '__main__':
-    # FileCompareUtils.writeFileCompareInfo(input_scan_directory='./',
-    #                                       isNeedMd5=True)
-    FileCompareUtils.writeCompareInfo(input_scan_directory='./',
-                                      isNeedMd5=True)

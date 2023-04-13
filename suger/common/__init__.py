@@ -1,3 +1,4 @@
+# Common
 from suger.common.ObjectUtils import ObjectUtils
 from suger.common.StringUtils import StringUtils
 
@@ -8,3 +9,8 @@ from suger.common.CsvUtils import CsvUtils
 # File
 from suger.common.FileUtils import FileUtils
 from suger.common.FileCompareUtils import FileCompareUtils
+
+# Server
+from suger.common.SSH import SSH
+from suger.common.TerminalUtils import TerminalUtils
+
