@@ -40,7 +40,7 @@ class StringUtils:
             return str[:maxWidth - 3] + "..."
 
     @staticmethod
-    def coverByteToHexString(byte:bytes):
+    def coverByteToHexString(byte):
         """
         将比特流变成Hex字符串
         """
