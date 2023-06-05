@@ -38,3 +38,17 @@ class StringUtils:
             return str
         else:
             return str[:maxWidth - 3] + "..."
+
+    @staticmethod
+    def coverByteToHexString(byte):
+        """
+        将比特流变成Hex字符串
+        """
+        return ''.join(['%02X' % b for b in byte])
+
+    @staticmethod
+    def coverStringToByteString(str):
+        """
+        将字符串变成ASCII比特流字符串
+        """
+        return str.encode().hex()
