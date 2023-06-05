@@ -5,17 +5,18 @@ from suger import csv
 
 @csv
 class MockData:
-    def __init__(self, name, age):
+    def __init__(self, id, name, age):
+        self.id = id
         self.name = name
         self.age = age
-        self.csv = ''
-
-
+        self.email = "qq.com"
 
 
 class Test(TestCase):
     def test_csv(self):
-        data = MockData(name='neko', age=18)
+        data = MockData(id=1, name='neko', age=18)
 
-        print(data.csv_str())
+        # print("{},{},{}".format(data.id, data.name, data.age))
+
         print(data.csv_format())
+        print(data.csv_str())

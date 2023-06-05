@@ -1,7 +1,6 @@
 import csv
 import io
 
-
 class CsvUtils:
     @staticmethod
     def serialize(obj):

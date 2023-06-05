@@ -14,4 +14,9 @@ class Test(TestCase):
         data = MockData(18)
 
         target_str = "MockData(age=18)"
-        self.assertEqual(data.__str__(), target_str, "not equals string")
+
+        printStr = data.__str__()
+        print(printStr)
+
+
+        self.assertEqual(printStr, target_str, "not equals string")
