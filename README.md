@@ -6,22 +6,9 @@ version = 0.2.1
 
 suger is a sugar ~ 
 
-use python with @decorator/@Annotation Like Java、C#、TypeScript 
-
-@author SolarisNeko
-
-
-# What is it
-Use Python in Decorator / Annotation Like Java Lombok / C# Annotation / TypeScript Decorator
-
-作者是写 Java / TypeScript 习惯了注解
-
-Use Like Other Language:
-1. Java Lombok @Data
-2. TypeScript  @Async
-3. C#  [Required(ErrorMessage = "{0} is required")]
-
-顺手写
+Feature:
+1. python @decorator = Java @annotation / C# [Required(ErrorMessage = "{0} is required")]
+2. python Stream = Java Stream / C# LinQ
 
 # How to use 如何使用
 ## install 安装依赖
