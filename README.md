@@ -35,7 +35,8 @@ from suger.stream.Stream import Stream
 
     def test_demo(self):
         data = [1, 2, 3, 3, 4, 5]
-        result = Stream(data).filter(lambda x: x % 2 == 0) \
+        result = Stream(data)\
+            .filter(lambda x: x % 2 == 0) \
             .sort(reverse=True) \
             .map(lambda x: x * 2) \
             .toSet()
