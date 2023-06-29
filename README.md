@@ -29,7 +29,7 @@ Use Like Other Language:
 pip install suger
 ```
 
-## Stream 流式计算 / from v0.2.1 
+## Stream 流式计算 / from v0.2.0
 ```python
 from suger.stream.Stream import Stream
 
