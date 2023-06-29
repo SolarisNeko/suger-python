@@ -3,7 +3,7 @@ from setuptools import setup
 
 PROJECT_NAME = 'suger'
 
-PROJECT_VERSION = '0.2.0'
+PROJECT_VERSION = '0.2.1'
 
 setup(
     name=PROJECT_NAME,

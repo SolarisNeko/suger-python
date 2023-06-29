@@ -1,6 +1,6 @@
 # suger
 
-version = 0.2.0
+version = 0.2.1
 
 ## Introduce 介绍
 
@@ -29,7 +29,7 @@ Use Like Other Language:
 pip install suger
 ```
 
-## Stream 流式计算 / from v0.2.0 
+## Stream 流式计算 / from v0.2.1 
 ```python
 from suger.stream.Stream import Stream
 
