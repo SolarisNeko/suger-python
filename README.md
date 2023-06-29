@@ -1,6 +1,6 @@
 # suger
 
-version = 0.1.1
+version = 0.2.0
 
 ## Introduce 介绍
 
@@ -29,6 +29,19 @@ Use Like Other Language:
 pip install suger
 ```
 
+## Stream 流式计算 / from v0.2.0 
+```python
+from suger.stream.Stream import Stream
+
+    def test_demo(self):
+        data = [1, 2, 3, 3, 4, 5]
+        result = Stream(data).filter(lambda x: x % 2 == 0) \
+            .sort(reverse=True) \
+            .map(lambda x: x * 2) \
+            .toSet()
+        self.assertEqual(result, {8, 4})
+
+```
 
 ## decorator 装饰器/注解
 ### @string | __str__
