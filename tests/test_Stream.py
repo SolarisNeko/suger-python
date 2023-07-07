@@ -80,3 +80,27 @@ class TestStream(TestCase):
     def test_to_set(self):
         result = Stream(globalData).toSet()
         self.assertEqual(result, {1, 2, 3, 4, 5})
+
+
+
+    def test_reduce(self):
+        stream = Stream([1, 2, 3, 4, 5])
+        result = stream.reduce(lambda x, y: x + y, 0)
+        self.assertEqual(result, 15)
+
+    def test_reduce_with_initial_value(self):
+        stream = Stream([1, 2, 3, 4, 5])
+        result = stream.reduce(lambda x, y: x + y, 10)
+        self.assertEqual(result, 25)
+
+    def test_group_by(self):
+        stream = Stream(['apple', 'banana', 'cherry', 'date'])
+        result = stream.groupBy(lambda x: len(x))
+        expected = {4: ['date'], 5: ['apple'], 6: ['banana', 'cherry']}
+        self.assertEqual(result, expected)
+
+    def test_group_by_multiple_keys(self):
+        stream = Stream(['apple', 'banana', 'cherry', 'date'])
+        result = stream.groupBy(lambda x: x[0])
+        expected = {'a': ['apple'], 'b': ['banana'], 'c': ['cherry'], 'd': ['date']}
+        self.assertEqual(result, expected)

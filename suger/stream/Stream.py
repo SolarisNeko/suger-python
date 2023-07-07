@@ -1,3 +1,4 @@
+from functools import reduce
 from typing import Callable, Iterable, Dict, Any, Set
 
 
@@ -16,6 +17,18 @@ class Stream:
 
     def filter(self, func: Callable) -> "Stream":
         return Stream(item for item in self.data if func(item))
+
+    def reduce(self, func: Callable, initial_value: Any = None) -> Any:
+        return reduce(func, self.data, initial_value)
+
+    def groupBy(self, key_func: Callable) -> Dict:
+        groups = {}
+        for item in self.data:
+            key = key_func(item)
+            if key not in groups:
+                groups[key] = []
+            groups[key].append(item)
+        return groups
 
     def first(self) -> Any:
         return next(iter(self.data), None)
